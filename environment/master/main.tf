@@ -33,5 +33,4 @@ resource "google_sql_user" "users" {
   name     = "root"
   password = "root"
   instance = google_sql_database_instance.instance.name
-  type     = "BUILT_IN"
 }
