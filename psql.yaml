@@ -6,4 +6,4 @@ steps:
   - |
     apt update
     apt install -y postgresql-client
-    psql -U <root> -p <root> -d <my-database> "table.sql"
+    psql -U <${USERNAME}> -p <${PASSWORD}> -d <my-database> "table.sql"
