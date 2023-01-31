@@ -1,9 +1,16 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-#   apt update
-#   apt install -y psql-client
-    psql -u <root> -p <root> -d <my-database> -f <./table.sql>
+  # Step 1: Use a Docker image with PostgreSQL installed
+  - name: Use PostgreSQL Image
+    uses: docker://postgres:14
+
+  # Step 2: Copy the SQL file to the container
+  - name: Copy SQL file
+    uses: actions/upload-artifact@v2
+    with:
+      name: sql-file
+      path: /table.sql
+
+  # Step 3: Execute the SQL file using the psql command
+  - name: Execute SQL
+    run: |
+      psql -U <root> -p <root> -d <my-database> < /table.sql
