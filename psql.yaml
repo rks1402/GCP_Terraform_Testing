@@ -4,6 +4,6 @@ steps:
   args:
   - '-c'
   - |
-    apt update
-    apt install -y psql-client
+#   apt update
+#   apt install -y psql-client
     psql -u <root> -p <root> -d <my-database> -f <./table.sql>
