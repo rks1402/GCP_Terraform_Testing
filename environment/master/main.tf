@@ -14,13 +14,17 @@ provider "google" {
 }
 
 resource "google_sql_database" "database" {
-  name     = "my-database"
+  name     = "my-database_test"
   instance = google_sql_database_instance.instance.name
+  data base_script {
+    statement = data.template_file.sql_file.rendered 
+  }
+    
 }
 
 
 resource "google_sql_database_instance" "instance" {
-  name             = "my-database-instance"
+  name             = "my-database-instance_test"
   region           = "us-west1"
   database_version = "POSTGRES_14"
   settings {
@@ -29,8 +33,12 @@ resource "google_sql_database_instance" "instance" {
 
 }
 
+data "template_file" "sql_file" {
+   template = "${file("D:\\GCP_Terraform_Testing\\table.sql")}"
+}
+
 resource "google_sql_user" "users" {
-  name     = "root"
-  password = "root"
+  name     = "root_test"
+  password = "root_test"
   instance = google_sql_database_instance.instance.name
 }
