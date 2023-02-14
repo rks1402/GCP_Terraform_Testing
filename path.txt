@@ -1,0 +1,1 @@
+projects/359659965310/locations/global/workloadIdentityPools/my-pool
